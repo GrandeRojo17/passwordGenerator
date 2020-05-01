@@ -104,13 +104,15 @@ function getPasswordOptions() {
   }
   //Ask a series of questions to discern the bounderies of the randomly generated pw
   let isUpper = confirm(
-    "Would you like upper Case characters in your password?"
+    "Would you like upper case characters in your password?"
   );
   let isLower = confirm(
-    "Would you like lower Case characters in your password?"
+    "Would you like lower case characters in your password?"
   );
-  let isNumber = confirm("Would you like numbers?");
-  let isSpecial = confirm("Special characters allowed in your password?");
+  let isNumber = confirm("Would you like numbers in your password?");
+  let isSpecial = confirm(
+    "Would you like special characters in your password?"
+  );
 
   if (
     isUpper === false &&
