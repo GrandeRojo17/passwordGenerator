@@ -1,22 +1,100 @@
+const arrLower = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+const arrUpper = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const arrSpecial = [
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "_",
+  "+",
+  "=",
+  "-",
+  ":",
+  ";",
+  "/",
+  "?",
+  " ",
+  ",",
+  "<",
+  "`",
+  ">",
+];
+const arrNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-var arrLower = ["a", "b", "c", "d", "e", "f", 'g', "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var arrUpper = ["A", "B", "C", "D", "F", 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-var arrSpecial = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '=', '-', ':', ';', '/', '?', ' ', ',', '<', '`', '>'];
-var arrNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-const generateEl = document.querySelector('#generate');
+const generateEl = document.querySelector("#generate");
 
 generateEl.addEventListener("click", writePassword);
 // // generateEl.addEventListener("click", getPasswordOptions() );
 
 function getPasswordOptions() {
-  var length = parseInt(prompt("How many characters long would you like your pw to be?"));
+  let length = parseInt(
+    prompt("How many characters long would you like your password to be?")
+  );
   if (isNaN(length) === true) {
-    alert("Password length must be a number");
+    alert("Password length must be a number and no greater than 128.");
     return;
   }
   if (length < 8) {
-    alert(' password must be atleast 8 characters.');
+    alert("Password must be atleast 8 characters.");
     return;
   }
 
@@ -24,20 +102,27 @@ function getPasswordOptions() {
     alert("Max length is 128 characters!");
     return;
   }
-
-  var isUpper = confirm("Would you like Up per Case characters in your password?");
-  var isLower = confirm("Would you like Lower Case characters in your password?");
-  var isNumber = confirm("Would you like numbers?");
-  var isSpecial = confirm("Would you like Special Case characters in your password?");
+  //Ask a series of questions to discern the bounderies of the randomly generated pw
+  let isUpper = confirm(
+    "Would you like upper Case characters in your password?"
+  );
+  let isLower = confirm(
+    "Would you like lower Case characters in your password?"
+  );
+  let isNumber = confirm("Would you like numbers?");
+  let isSpecial = confirm("Special characters allowed in your password?");
 
   if (
-    isUpper === false && isLower === false && isNumber === false && isSpecial === false
+    isUpper === false &&
+    isLower === false &&
+    isNumber === false &&
+    isSpecial === false
   ) {
     alert("You have to accept atleast 1 character type.");
 
     return;
   }
-  var passwordOptions = {
+  let passwordOptions = {
     length: length,
     isUpper: isUpper,
     isLower: isLower,
@@ -46,35 +131,26 @@ function getPasswordOptions() {
   };
 
   return passwordOptions;
-
 }
 
-
-
-
-
-
 function getRandom(arr) {
-  var randIndex = Math.floor(Math.random() * arr.length);
-  var randDigit = arr[randIndex];
+  let randIndex = Math.floor(Math.random() * arr.length);
+  let randDigit = arr[randIndex];
   return randDigit;
-};
+}
 function generatePW() {
-  var options = getPasswordOptions();
-  var result = [];
-  var possibleCharacters = [];
+  let options = getPasswordOptions();
+  let result = [];
+  let possibleCharacters = [];
 
   if (options.isLower) {
     possibleCharacters = possibleCharacters.concat(arrLower);
   }
   if (options.isUpper) {
-
     possibleCharacters = possibleCharacters.concat(arrUpper);
   }
   if (options.isNumber) {
-
     possibleCharacters = possibleCharacters.concat(arrNumber);
-
   }
   if (options.isSpecial) {
     possibleCharacters = possibleCharacters.concat(arrSpecial);
@@ -82,14 +158,14 @@ function generatePW() {
   console.log(possibleCharacters);
 
   for (var i = 0; i < options.length; i++) {
-    var possibleCharacter = getRandom(possibleCharacters);
+    let possibleCharacter = getRandom(possibleCharacters);
     result.push(possibleCharacter);
   }
   return result.join("");
-};
+}
 
 function writePassword() {
-  var password = generatePW();
+  let password = generatePW();
   passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
