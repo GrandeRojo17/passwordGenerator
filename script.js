@@ -87,7 +87,9 @@ generateEl.addEventListener("click", writePassword);
 
 function getPasswordOptions() {
   let length = parseInt(
-    prompt("How many characters long would you like your password to be?")
+    prompt(
+      "How many characters long would you like your password to be?( between 8-128)"
+    )
   );
   if (isNaN(length) === true) {
     alert("Password length must be a number and no greater than 128.");
@@ -157,7 +159,7 @@ function generatePW() {
   if (options.isSpecial) {
     possibleCharacters = possibleCharacters.concat(arrSpecial);
   }
-  console.log(possibleCharacters);
+  console.log("A list of possible characters " + possibleCharacters);
 
   for (var i = 0; i < options.length; i++) {
     let possibleCharacter = getRandom(possibleCharacters);
